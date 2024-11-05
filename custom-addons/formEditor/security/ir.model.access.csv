@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_form_editor_template,access_form_editor_template,model_form_editor_template,base.group_user,1,1,1,1
+access_form_editor_question,access_form_editor_question,model_form_editor_question,base.group_user,1,1,1,1
+access_import_results_wizard,access_import_results_wizard,model_import_results_wizard,base.group_user,1,1,1,1
