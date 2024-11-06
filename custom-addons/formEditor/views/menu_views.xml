@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem id="menu_form_editor_root" name="Form Editor" sequence="10"/>
-    
+
     <menuitem id="menu_form_editor_templates" name="Templates" parent="menu_form_editor_root" action="action_form_editor_template" sequence="10"/>
-    
+
     <menuitem id="menu_form_editor_import" name="Import Results" parent="menu_form_editor_root" action="action_import_results_wizard" sequence="20"/>
 </odoo>
