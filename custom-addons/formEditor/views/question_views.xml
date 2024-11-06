@@ -34,21 +34,21 @@
                         <page string="Description">
                             <field name="description" placeholder="Question description..."/>
                         </page>
-                        <page string="Options" attrs="{'invisible': [('type', '!=', 'select')]}">
+                        <page string="Options" invisible="type != 'select'">
                             <field name="options" placeholder="Enter options, one per line"/>
                         </page>
-                        <page string="Aggregation" attrs="{'invisible': [('type', '=', 'text')]}">
+                        <page string="Aggregation" invisible="type != 'text'">
                             <group>
-                                <group attrs="{'invisible': [('type', '!=', 'number')]}">
+                                <group invisible="type != 'number'">
                                     <field name="average_number"/>
                                     <field name="min_number"/>
                                     <field name="max_number"/>
                                 </group>
-                                <group attrs="{'invisible': [('type', '!=', 'boolean')]}">
+                                <group invisible="type != 'boolean'">
                                     <field name="true_count_boolean"/>
                                     <field name="false_count_boolean"/>
                                 </group>
-                                <group attrs="{'invisible': [('type', '!=', 'select')]}">
+                                <group invisible="type != 'select'">
                                     <field name="option_counts"/>
                                 </group>
                             </group>
