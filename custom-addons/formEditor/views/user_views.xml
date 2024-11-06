@@ -1,14 +1,17 @@
-<record id="view_users_form_inherit_form_editor" model="ir.ui.view">
-    <field name="name">res.users.form.inherit.form.editor</field>
-    <field name="model">res.users</field>
-    <field name="inherit_id" ref="base.view_users_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//notebook" position="inside">
-            <page string="Form Editor">
-                <group>
-                    <field name="api_token"/>
-                </group>
-            </page>
-        </xpath>
-    </field>
-</record>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_inherit_form_editor" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.form.editor</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Form Editor">
+                    <group>
+                        <field name="api_token"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
