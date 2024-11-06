@@ -9,11 +9,11 @@ class FormEditorQuestion(models.Model):
     sequence = fields.Integer(string='Sequence', default=10)
     question_text = fields.Text(string='Question Text', required=True)
     question_type = fields.Selection([
-        ('number', 'Integer'),
-        ('text', 'SingleLine'),
-        ('text', 'MultiLine'),
-        ('boolean', 'Checkbox'),
-        ('select', 'Select')
+        ('Integer', 'Integer'),
+        ('SingleLine', 'Single Line'),
+        ('MultiLine', 'Multi Line'),
+        ('Checkbox', 'Checkbox'),
+        ('Select', 'Select')
     ], string='Question Type', required=True)
 
     # Aggregation fields

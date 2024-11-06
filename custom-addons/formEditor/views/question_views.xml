@@ -24,19 +24,23 @@
                         <field name="template_id"/>
                     </group>
                     <group string="Aggregation Results">
-                        <group invisible="question_type != 'number'">
+                        <group invisible="question_type != 'Integer'">
                             <field name="average_number"/>
                             <field name="min_number"/>
                             <field name="max_number"/>
                         </group>
-                        <group invisible="question_type != 'boolean'">
+                        <group invisible="question_type != 'Checkbox'">
                             <field name="true_count_boolean"/>
                             <field name="false_count_boolean"/>
                         </group>
-                        <group invisible="question_type != 'select'">
+                        <group invisible="question_type != 'Select'">
                             <field name="option_counts"/>
                         </group>
-                        <group invisible="question_type != 'text'">
+                        <group invisible="question_type != 'SingleLine'">
+                            <field name="unique_count_text"/>
+                            <field name="most_common_text"/>
+                        </group>
+                        <group invisible="question_type != 'MultiLine'">
                             <field name="unique_count_text"/>
                             <field name="most_common_text"/>
                         </group>
