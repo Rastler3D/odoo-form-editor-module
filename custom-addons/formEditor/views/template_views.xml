@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_form_editor_template_tree" model="ir.ui.view">
-        <field name="name">form.editor.template.tree</field>
+    <record id="view_form_editor_template_list" model="ir.ui.view">
+        <field name="name">form.editor.template.list</field>
         <field name="model">form.editor.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
                 <field name="topic"/>
                 <field name="created_by"/>
@@ -12,7 +12,7 @@
                 <field name="question_count"/>
                 <field name="filled_count"/>
                 <field name="likes"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -50,13 +50,13 @@
                             <field name="description" placeholder="Describe your template..."/>
                         </page>
                         <page string="Questions">
-                            <field name="question_ids" mode="tree">
-                                <tree>
+                            <field name="question_ids" mode="list">
+                                <list>
                                     <field name="sequence" widget="handle"/>
                                     <field name="title"/>
                                     <field name="type"/>
                                     <field name="display_in_table"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -68,6 +68,6 @@
     <record id="action_form_editor_template" model="ir.actions.act_window">
         <field name="name">Templates</field>
         <field name="res_model">form.editor.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

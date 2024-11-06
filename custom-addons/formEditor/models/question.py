@@ -22,11 +22,11 @@ class FormEditorQuestion(models.Model):
     display_in_table = fields.Boolean(string='Display In Table')
 
     # Aggregation fields
-    average_number = fields.Float(string='Average (Number)', digits=(10, 2))
-    min_number = fields.Float(string='Minimum (Number)', digits=(10, 2))
-    max_number = fields.Float(string='Maximum (Number)', digits=(10, 2))
+    average_number = fields.Float(string='Average Number', digits=(10, 2))
+    min_number = fields.Float(string='Minimum Number', digits=(10, 2))
+    max_number = fields.Float(string='Maximum Number', digits=(10, 2))
     most_common_text = fields.Text(string='Most Common Text')
     unique_count_text = fields.Integer(string='Unique Text Count')
-    true_count_boolean = fields.Integer(string='True Count (Boolean)')
-    false_count_boolean = fields.Integer(string='False Count (Boolean)')
-    option_counts = fields.Text(string='Option Counts (Select)')
+    true_count_boolean = fields.Integer(string='True Count')
+    false_count_boolean = fields.Integer(string='False Count')
+    option_counts = fields.Text(string='Option Counts')

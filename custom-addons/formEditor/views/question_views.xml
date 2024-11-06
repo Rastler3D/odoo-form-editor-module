@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_form_editor_question_tree" model="ir.ui.view">
-        <field name="name">form.editor.question.tree</field>
+    <record id="view_form_editor_question_list" model="ir.ui.view">
+        <field name="name">form.editor.question.list</field>
         <field name="model">form.editor.question</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" widget="handle"/>
                 <field name="title"/>
                 <field name="type"/>
                 <field name="display_in_table"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -70,6 +70,6 @@
     <record id="action_form_editor_question" model="ir.actions.act_window">
         <field name="name">Questions</field>
         <field name="res_model">form.editor.question</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

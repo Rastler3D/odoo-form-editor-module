@@ -46,7 +46,7 @@ class FormEditorTemplate(models.Model):
             'name': 'Questions',
             'type': 'ir.actions.act_window',
             'res_model': 'form.editor.question',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('template_id', '=', self.id)],
             'context': {'default_template_id': self.id},
         }
