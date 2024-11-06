@@ -6,17 +6,14 @@ class FormEditorQuestion(models.Model):
     _order = 'sequence, id'
 
     template_id = fields.Many2one('form.editor.template', string='Template', required=True)
-    type = fields.Selection([
-        ('text', 'Text'),
+    sequence = fields.Integer(string='Sequence', default=10)
+    question_text = fields.Text(string='Question Text', required=True)
+    question_type = fields.Selection([
         ('number', 'Number'),
+        ('text', 'Text'),
         ('boolean', 'Boolean'),
         ('select', 'Select')
-    ], string='Type', required=True)
-    title = fields.Char(string='Title', required=True)
-    description = fields.Text(string='Description')
-    options = fields.Text(string='Options')
-    display_in_table = fields.Boolean(string='Display in Table', default=False)
-    sequence = fields.Integer(string='Sequence', default=10)
+    ], string='Question Type', required=True)
 
     # Aggregation fields
     average_number = fields.Float(string='Average (Number)', digits=(10, 2))

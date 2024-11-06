@@ -6,9 +6,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="sequence" widget="handle"/>
-                <field name="title"/>
-                <field name="type"/>
-                <field name="display_in_table"/>
+                <field name="question_text"/>
+                <field name="question_type"/>
             </tree>
         </field>
     </record>
@@ -20,48 +19,26 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
-                            <field name="title"/>
-                            <field name="type"/>
-                            <field name="display_in_table"/>
+                        <field name="question_text"/>
+                        <field name="question_type"/>
+                        <field name="template_id"/>
+                    </group>
+                    <group string="Aggregation Results" attrs="{'invisible': [('question_type', '=', 'text')]}">
+                        <group attrs="{'invisible': [('question_type', '!=', 'number')]}">
+                            <field name="average_number"/>
+                            <field name="min_number"/>
+                            <field name="max_number"/>
                         </group>
-                        <group>
-                            <field name="template_id"/>
-                            <field name="sequence"/>
+                        <group attrs="{'invisible': [('question_type', '!=', 'boolean')]}">
+                            <field name="true_count_boolean"/>
+                            <field name="false_count_boolean"/>
+                        </group>
+                        <group attrs="{'invisible': [('question_type', '!=', 'select')]}">
+                            <field name="option_counts"/>
                         </group>
                     </group>
-                    <notebook>
-                        <page string="Description">
-                            <field name="description" placeholder="Question description..."/>
-                        </page>
-                        <page string="Options" invisible="type != 'select'">
-                            <field name="options" placeholder="Enter options, one per line"/>
-                        </page>
-                        <page string="Aggregation" invisible="type != 'text'">
-                            <group>
-                                <group invisible="type != 'number'">
-                                    <field name="average_number"/>
-                                    <field name="min_number"/>
-                                    <field name="max_number"/>
-                                </group>
-                                <group invisible="type != 'boolean'">
-                                    <field name="true_count_boolean"/>
-                                    <field name="false_count_boolean"/>
-                                </group>
-                                <group invisible="type != 'select'">
-                                    <field name="option_counts"/>
-                                </group>
-                            </group>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
-    </record>
-
-    <record id="action_form_editor_question" model="ir.actions.act_window">
-        <field name="name">Questions</field>
-        <field name="res_model">form.editor.question</field>
-        <field name="view_mode">tree,form</field>
     </record>
 </odoo>

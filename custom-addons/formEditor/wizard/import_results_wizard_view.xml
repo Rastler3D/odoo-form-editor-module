@@ -6,8 +6,7 @@
         <field name="arch" type="xml">
             <form string="Import Results">
                 <group>
-                    <field name="api_token" password="True"/>
-                    <field name="user_id"/>
+                    <field name="api_token"/>
                 </group>
                 <footer>
                     <button name="action_import_results" string="Import" type="object" class="btn-primary"/>

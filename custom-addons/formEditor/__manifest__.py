@@ -13,6 +13,7 @@
         'views/template_views.xml',
         'views/question_views.xml',
         'wizard/import_results_wizard_view.xml',
+        'views/user_views.xml',
         'views/menu_views.xml',
     ],
     'installable': True,
