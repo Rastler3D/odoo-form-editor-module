@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_form_editor_template_tree" model="ir.ui.view">
+        <field name="name">form.editor.template.tree</field>
+        <field name="model">form.editor.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="topic"/>
+                <field name="created_by"/>
+                <field name="created_at"/>
+                <field name="question_count"/>
+                <field name="filled_count"/>
+                <field name="likes"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="view_form_editor_template_form" model="ir.ui.view">
         <field name="name">form.editor.template.form</field>
         <field name="model">form.editor.template</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_questions" type="object" class="oe_stat_button" icon="fa-question-circle">
+                            <field name="question_count" widget="statinfo" string="Questions"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Template Name"/></h1>
+                    </div>
                     <group>
-                        <field name="name"/>
-                        <field name="author"/>
-                        <field name="total_responses"/>
+                        <group>
+                            <field name="topic"/>
+                            <field name="tags" widget="many2many_tags"/>
+                            <field name="access_setting"/>
+                            <field name="allow_list" attrs="{'invisible': [('access_setting', '!=', 'restricted')]}"/>
+                        </group>
+                        <group>
+                            <field name="created_by"/>
+                            <field name="created_at"/>
+                            <field name="filled_count"/>
+                            <field name="likes"/>
+                        </group>
                     </group>
                     <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Describe your template..."/>
+                        </page>
                         <page string="Questions">
-                            <field name="question_ids">
+                            <field name="question_ids" mode="tree">
                                 <tree>
-                                    <field name="question_text"/>
-                                    <field name="question_type"/>
-                                    <field name="number_of_answers"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="title"/>
+                                    <field name="type"/>
+                                    <field name="display_in_table"/>
                                 </tree>
-                                <form>
-                                    <group>
-                                        <field name="question_text"/>
-                                        <field name="question_type"/>
-                                        <field name="number_of_answers"/>
-                                        <field name="average_number" attrs="{'invisible': [('question_type', '!=', 'number')]}"/>
-                                        <field name="min_number" attrs="{'invisible': [('question_type', '!=', 'number')]}"/>
-                                        <field name="max_number" attrs="{'invisible': [('question_type', '!=', 'number')]}"/>
-                                        <field name="popular_answers" attrs="{'invisible': [('question_type', '=', 'number')]}"/>
-                                    </group>
-                                </form>
                             </field>
                         </page>
                     </notebook>
@@ -38,20 +65,8 @@
         </field>
     </record>
 
-    <record id="view_form_editor_template_tree" model="ir.ui.view">
-        <field name="name">form.editor.template.tree</field>
-        <field name="model">form.editor.template</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="author"/>
-                <field name="total_responses"/>
-            </tree>
-        </field>
-    </record>
-
     <record id="action_form_editor_template" model="ir.actions.act_window">
-        <field name="name">Form Editor Templates</field>
+        <field name="name">Templates</field>
         <field name="res_model">form.editor.template</field>
         <field name="view_mode">tree,form</field>
     </record>

@@ -6,7 +6,8 @@
         <field name="arch" type="xml">
             <form string="Import Results">
                 <group>
-                    <field name="api_token"/>
+                    <field name="api_token" password="True"/>
+                    <field name="user_id"/>
                 </group>
                 <footer>
                     <button name="action_import_results" string="Import" type="object" class="btn-primary"/>
@@ -18,7 +19,6 @@
 
     <record id="action_import_results_wizard" model="ir.actions.act_window">
         <field name="name">Import Results</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">import.results.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
