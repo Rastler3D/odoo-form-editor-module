@@ -16,7 +16,7 @@ class ImportResultsWizard(models.TransientModel):
         if not base_url:
             raise UserError('Form Editor API URL is not configured. Please set it in the system parameters.')
 
-        headers = {'Authorization': f'Bearer {self.api_token}'}
+        headers = {'X-API-Token': f'{self.api_token}'}
 
         try:
             # Fetch current user
