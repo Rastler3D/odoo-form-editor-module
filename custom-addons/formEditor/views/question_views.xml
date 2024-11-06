@@ -23,17 +23,17 @@
                         <field name="question_type"/>
                         <field name="template_id"/>
                     </group>
-                    <group string="Aggregation Results" attrs="{'invisible': [('question_type', '=', 'text')]}">
-                        <group attrs="{'invisible': [('question_type', '!=', 'number')]}">
+                    <group string="Aggregation Results" invisible="question_type = 'text'">
+                        <group invisible="question_type != 'number'">
                             <field name="average_number"/>
                             <field name="min_number"/>
                             <field name="max_number"/>
                         </group>
-                        <group attrs="{'invisible': [('question_type', '!=', 'boolean')]}">
+                        <group invisible="question_type != 'boolean'">
                             <field name="true_count_boolean"/>
                             <field name="false_count_boolean"/>
                         </group>
-                        <group attrs="{'invisible': [('question_type', '!=', 'select')]}">
+                        <group invisible="question_type != 'select'">
                             <field name="option_counts"/>
                         </group>
                     </group>
