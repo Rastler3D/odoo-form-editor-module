@@ -13,7 +13,6 @@ exec odoo \
     --init=all \
     --without-demo=True \
     --proxy-mode \
-    --addons-path="/opt/odoo/addons,/opt/odoo/custom-addons" \
     --db_host="${ODOO_DATABASE_HOST}" \
     --db_port="${ODOO_DATABASE_PORT}" \
     --db_user="${ODOO_DATABASE_USER}" \

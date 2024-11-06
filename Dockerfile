@@ -14,7 +14,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends locales netc
 WORKDIR /app
 
 COPY --chmod=755 entrypoint.sh ./
-COPY ./custom-addons /mnt/extra-addons
+COPY ./custom-addons /var/lib/odoo/addons/17.0
 
 ENTRYPOINT ["/bin/sh"]
 
