@@ -4,7 +4,7 @@
         <field name="name">import.results.wizard.form</field>
         <field name="model">import.results.wizard</field>
         <field name="arch" type="xml">
-            <form string="Import Results">
+            <form string="Import Data">
                 <group>
                     <field name="api_token"/>
                 </group>
