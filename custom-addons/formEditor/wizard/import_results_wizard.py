@@ -109,7 +109,7 @@ class ImportResultsWizard(models.TransientModel):
     def _update_aggregation(self, template, agg_data):
         for question_id, aggregation in agg_data['questions'].items():
             question = self.env['form.editor.question'].search([
-                ('template_id', '=', template.id),
+                ('template_id', '=', template["id"]),
                 ('external_id', '=', int(question_id))
             ], limit=1)
 
