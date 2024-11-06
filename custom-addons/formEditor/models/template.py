@@ -2,6 +2,7 @@ from odoo import models, fields, api
 import requests
 import base64
 
+
 class FormEditorTemplate(models.Model):
     _name = 'form.editor.template'
     _description = 'Form Editor Template'
@@ -24,6 +25,7 @@ class FormEditorTemplate(models.Model):
     likes = fields.Integer(string='Likes', default=0)
     filled_count = fields.Integer(string='Filled Count', default=0)
     question_ids = fields.One2many('form.editor.question', 'template_id', string='Questions', ondelete='cascade', index=True)
+    user_id = fields.Many2one('res.users', string='User', required=True, default=lambda self: self.env.user)
 
     @api.depends('image_url')
     def _compute_image(self):
@@ -33,6 +35,7 @@ class FormEditorTemplate(models.Model):
                 response = requests.get(record.image_url, timeout=5)
                 if response.status_code == 200:
                     record.image = base64.b64encode(response.content)
+
     @api.depends('question_ids')
     def _compute_question_count(self):
         for template in self:

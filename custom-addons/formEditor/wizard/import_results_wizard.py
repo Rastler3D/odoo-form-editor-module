@@ -31,14 +31,16 @@ class ImportResultsWizard(models.Model):
             user_response = requests.get(f'{base_url}/api/User/me', headers=headers)
             user_response.raise_for_status()
             current_user = user_response.json()
-
             # Fetch user templates
             templates_response = requests.get(f'{base_url}/api/Template/user/{current_user["id"]}?pageSize=-1', headers=headers)
             templates_response.raise_for_status()
             templates = templates_response.json().get('data', [])
 
             for template_data in templates:
-                template = self.env['form.editor.template'].search([('name', '=', template_data['name'])], limit=1)
+                template = self.env['form.editor.template'].search([
+                    ('external_id', '=', template_data['id']),
+                    ('user_id', '=', user.id)
+                ], limit=1)
                 if not template:
                     template = self.env['form.editor.template'].create(self._prepare_template_values(template_data))
                 else:
@@ -89,6 +91,7 @@ class ImportResultsWizard(models.Model):
             'allow_list': ','.join(map(str, template_data.get('allowList', []))),
             'filled_count': template_data['filledCount'],
             'likes': template_data['likes'],
+            'user_id': self.env.user.id
         }
     def _get_or_create_tags(self, tag_names):
         tag_ids = []
