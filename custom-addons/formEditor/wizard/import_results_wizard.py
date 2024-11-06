@@ -25,7 +25,7 @@ class ImportResultsWizard(models.TransientModel):
             current_user = user_response.json()
 
             # Fetch user templates
-            templates_response = requests.get(f'{base_url}/api/Template/user/{current_user["id"]}', headers=headers)
+            templates_response = requests.get(f'{base_url}/api/Template/user/{current_user["id"]}?pageSize=-1', headers=headers)
             templates_response.raise_for_status()
             templates = templates_response.json().get('data', [])
 
