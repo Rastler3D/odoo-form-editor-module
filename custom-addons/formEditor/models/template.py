@@ -4,6 +4,7 @@ class FormEditorTemplate(models.Model):
     _name = 'form.editor.template'
     _description = 'Form Editor Template'
 
+    external_id = fields.Integer(string='External ID', required=True)
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
     image = fields.Char(string='Image URL')
