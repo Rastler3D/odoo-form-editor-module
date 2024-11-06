@@ -15,7 +15,7 @@ class FormEditorTemplate(models.Model):
     access_setting = fields.Selection([
         ('All', 'All'),
         ('Specified', 'Specified'),
-    ], string='Access Setting', default='public')
+    ], string='Access Setting', default='All')
     allow_list = fields.Char(string='Allow List')
     likes = fields.Integer(string='Likes', default=0)
     filled_count = fields.Integer(string='Filled Count', default=0)
