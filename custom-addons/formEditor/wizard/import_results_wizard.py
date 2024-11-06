@@ -76,7 +76,7 @@ class ImportResultsWizard(models.TransientModel):
             'image': template_data.get('image'),
             'creator_id': template_data['creatorId'],
             'created_by': template_data['createdBy'],
-            'created_at': datetime.fromisoformat(template_data['createdAt'].replace('Z', '+00:00')),
+            'created_at': datetime.fromisoformat(template_data['createdAt'].replace('Z', '+00:00')).replace(tzinfo=None),
             'tags': [(6, 0, self._get_or_create_tags(template_data['tags']))],
             'access_setting': template_data['accessSetting'],
             'allow_list': ','.join(map(str, template_data.get('allowList', []))),
