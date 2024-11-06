@@ -98,7 +98,7 @@ class ImportResultsWizard(models.TransientModel):
             'title': question_data['title'],
             'type': question_data['type'],
             'options': '\n'.join(question_data.get('options', [])),
-            'displayInTable': question_data['displayInTable'],
+            'display_in_table': question_data['displayInTable'],
             'description': question_data['description'],
             'order': order,
         }
