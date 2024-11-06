@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 import requests
 from odoo.exceptions import UserError
+from datetime import datetime
 
 class ImportResultsWizard(models.TransientModel):
     _name = 'import.results.wizard'
@@ -75,7 +76,7 @@ class ImportResultsWizard(models.TransientModel):
             'image': template_data.get('image'),
             'creator_id': template_data['creatorId'],
             'created_by': template_data['createdBy'],
-            'created_at': template_data['createdAt'],
+            'created_at': datetime.fromisoformat(template_data['createdAt']),
             'tags': [(6, 0, self._get_or_create_tags(template_data['tags']))],
             'access_setting': template_data['accessSetting'],
             'allow_list': ','.join(map(str, template_data.get('allowList', []))),

@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 
+
 class FormEditorTemplate(models.Model):
     _name = 'form.editor.template'
     _description = 'Form Editor Template'
