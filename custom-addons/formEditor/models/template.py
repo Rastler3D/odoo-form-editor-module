@@ -29,6 +29,17 @@ class FormEditorTemplate(models.Model):
 
     question_count = fields.Integer(string='Question Count', compute='_compute_question_count', store=True)
 
+    def action_view_questions(self):
+        self.ensure_one()
+        return {
+            'name': 'Questions',
+            'type': 'ir.actions.act_window',
+            'res_model': 'form.editor.question',
+            'view_mode': 'tree,form',
+            'domain': [('template_id', '=', self.id)],
+            'context': {'default_template_id': self.id},
+        }
+
 class FormEditorTag(models.Model):
     _name = 'form.editor.tag'
     _description = 'Form Editor Tag'
