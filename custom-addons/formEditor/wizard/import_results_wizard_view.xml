@@ -17,7 +17,7 @@
     </record>
 
     <record id="action_import_results_wizard" model="ir.actions.act_window">
-        <field name="name">Import Results</field>
+        <field name="name">Import Data</field>
         <field name="res_model">import.results.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
