@@ -9,9 +9,10 @@ class FormEditorQuestion(models.Model):
     sequence = fields.Integer(string='Sequence', default=10)
     question_text = fields.Text(string='Question Text', required=True)
     question_type = fields.Selection([
-        ('number', 'Number'),
-        ('text', 'Text'),
-        ('boolean', 'Boolean'),
+        ('number', 'Integer'),
+        ('text', 'SingleLine'),
+        ('text', 'MultiLine'),
+        ('boolean', 'Checkbox'),
         ('select', 'Select')
     ], string='Question Type', required=True)
 
