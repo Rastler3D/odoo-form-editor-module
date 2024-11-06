@@ -3,7 +3,7 @@ import requests
 from odoo.exceptions import UserError
 from datetime import datetime
 
-class ImportResultsWizard(models.TransientModel):
+class ImportResultsWizard(models.Model):
     _name = 'import.results.wizard'
     _description = 'Import Results Wizard'
 
@@ -73,7 +73,7 @@ class ImportResultsWizard(models.TransientModel):
             'external_id': template_data['id'],
             'description': template_data['description'],
             'topic': template_data['topic'],
-            'image': template_data.get('image'),
+            'image_url': template_data.get('image'),
             'creator_id': template_data['creatorId'],
             'created_by': template_data['createdBy'],
             'created_at': datetime.fromisoformat(template_data['createdAt'].replace('Z', '+00:00')).replace(tzinfo=None),

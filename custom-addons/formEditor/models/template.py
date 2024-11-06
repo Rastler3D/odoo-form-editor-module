@@ -1,5 +1,6 @@
 from odoo import models, fields, api
-
+import requests
+import base64
 
 class FormEditorTemplate(models.Model):
     _name = 'form.editor.template'
@@ -8,7 +9,8 @@ class FormEditorTemplate(models.Model):
     external_id = fields.Integer(string='External ID', required=True)
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
-    image = fields.Char(string='Image URL')
+    image_url = fields.Char(string='Image URL')
+    image = fields.Binary(string='Image', compute='_compute_image', store=True)
     creator_id = fields.Integer(string='Creator ID')
     created_by = fields.Char(string='Created By')
     created_at = fields.Datetime(string='Created At')
@@ -23,6 +25,14 @@ class FormEditorTemplate(models.Model):
     filled_count = fields.Integer(string='Filled Count', default=0)
     question_ids = fields.One2many('form.editor.question', 'template_id', string='Questions')
 
+    @api.depends('image_url')
+    def _compute_image(self):
+        for record in self:
+            record.image = False  # Default value if URL is empty or invalid
+            if record.image_url:
+                response = requests.get(record.image_url, timeout=5)
+                if response.status_code == 200:
+                    record.image = base64.b64encode(response.content)
     @api.depends('question_ids')
     def _compute_question_count(self):
         for template in self:
