@@ -8,7 +8,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="title"/>
                 <field name="type"/>
-                <field name="displayInTable"/>
+                <field name="display_in_table"/>
             </tree>
         </field>
     </record>
