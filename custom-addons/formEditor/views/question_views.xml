@@ -23,7 +23,7 @@
                         <field name="question_type"/>
                         <field name="template_id"/>
                     </group>
-                    <group string="Aggregation Results" invisible="question_type = 'text'">
+                    <group string="Aggregation Results">
                         <group invisible="question_type != 'number'">
                             <field name="average_number"/>
                             <field name="min_number"/>
@@ -35,6 +35,10 @@
                         </group>
                         <group invisible="question_type != 'select'">
                             <field name="option_counts"/>
+                        </group>
+                        <group invisible="question_type != 'text'">
+                            <field name="unique_count_text"/>
+                            <field name="most_common_text"/>
                         </group>
                     </group>
                 </sheet>
