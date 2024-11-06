@@ -5,7 +5,7 @@ class FormEditorQuestion(models.Model):
     _description = 'Form Editor Question'
     _order = 'sequence, id'
 
-    template_id = fields.Many2one('form.editor.template', string='Template', required=True)
+    template_id = fields.Many2one('form.editor.template', string='Template', required=True, ondelete='cascade', index=True)
     external_id = fields.Integer(string='External ID', required=True)
     sequence = fields.Integer(string='Sequence', default=10)
     title = fields.Text(string='Question Title', required=True)

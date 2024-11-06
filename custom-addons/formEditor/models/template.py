@@ -23,7 +23,7 @@ class FormEditorTemplate(models.Model):
     allow_list = fields.Char(string='Allow List')
     likes = fields.Integer(string='Likes', default=0)
     filled_count = fields.Integer(string='Filled Count', default=0)
-    question_ids = fields.One2many('form.editor.question', 'template_id', string='Questions')
+    question_ids = fields.One2many('form.editor.question', 'template_id', string='Questions', ondelete='cascade', index=True)
 
     @api.depends('image_url')
     def _compute_image(self):

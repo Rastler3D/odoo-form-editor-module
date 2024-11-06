@@ -9,6 +9,13 @@ class ImportResultsWizard(models.Model):
 
     api_token = fields.Char(string='API Token', required=True)
 
+    def default_get(self, fields):
+        res = super(ImportResultsWizard, self).default_get(fields)
+        user = self.env.user
+        if user.api_token:
+            res['api_token'] = user.api_token
+        return res
+
     def action_import_results(self):
         user = self.env.user
         user.api_token = self.api_token
