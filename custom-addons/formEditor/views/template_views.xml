@@ -36,7 +36,7 @@
                             <field name="topic"/>
                             <field name="tags" widget="many2many_tags"/>
                             <field name="access_setting"/>
-                            <field name="allow_list" attrs="{'invisible': [('access_setting', '!=', 'restricted')]}"/>
+                            <field name="allow_list" invisible="access_setting != 'restricted'"/>
                         </group>
                         <group>
                             <field name="created_by"/>
