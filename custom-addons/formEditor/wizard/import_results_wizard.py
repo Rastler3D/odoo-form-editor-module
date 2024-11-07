@@ -100,7 +100,7 @@ class ImportResultsWizard(models.Model):
         return tag_ids
 
     def _prepare_question_values(self, question_data, order, agg_data, template_id=None):
-        aggregation = agg_data['questions'][question_data['id']]
+        aggregation = agg_data['questions'][str(question_data['id'])]
         values = {
             'external_id': question_data['id'],
             'title': question_data['title'],
