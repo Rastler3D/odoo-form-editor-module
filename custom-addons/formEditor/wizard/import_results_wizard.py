@@ -37,6 +37,10 @@ class ImportResultsWizard(models.Model):
             templates = templates_response.json().get('data', [])
 
             for template_data in templates:
+                # Fetch aggregation data
+                agg_response = requests.get(f'{base_url}/api/Template/{template_data["id"]}/aggregation', headers=headers)
+                agg_response.raise_for_status()
+                agg_data = agg_response.json()
                 template = self.env['form.editor.template'].search([
                     ('external_id', '=', template_data['id']),
                     ('user_id', '=', user.id)
@@ -44,7 +48,7 @@ class ImportResultsWizard(models.Model):
                 if not template:
                     template = self.env['form.editor.template'].create(self._prepare_template_values(template_data))
                 else:
-                    template.write(self._prepare_template_values(template_data))
+                    template.write(self._prepare_template_values(template_data,agg_data))
 
                 for index, question_data in enumerate(template_data['questions']):
                     question = self.env['form.editor.question'].search([
@@ -53,16 +57,9 @@ class ImportResultsWizard(models.Model):
                     ], limit=1)
 
                     if not question:
-                        self.env['form.editor.question'].create(self._prepare_question_values(question_data, index, template.id))
+                        self.env['form.editor.question'].create(self._prepare_question_values(question_data, index, agg_data, template.id))
                     else:
-                        question.write(self._prepare_question_values(question_data, index))
-
-                # Fetch aggregation data
-                agg_response = requests.get(f'{base_url}/api/Template/{template_data["id"]}/aggregation', headers=headers)
-                agg_response.raise_for_status()
-                agg_data = agg_response.json()
-
-                self._update_aggregation(template_data, agg_data)
+                        question.write(self._prepare_question_values(question_data, index, agg_data))
 
             return {
                 'type': 'ir.actions.client',
@@ -102,7 +99,8 @@ class ImportResultsWizard(models.Model):
             tag_ids.append(tag.id)
         return tag_ids
 
-    def _prepare_question_values(self, question_data, order, template_id=None):
+    def _prepare_question_values(self, question_data, order, agg_data, template_id=None):
+        aggregation = agg_data['questions'][question_data['id']]
         values = {
             'external_id': question_data['id'],
             'title': question_data['title'],
@@ -111,28 +109,19 @@ class ImportResultsWizard(models.Model):
             'display_in_table': question_data['displayInTable'],
             'description': question_data['description'],
             'order': order,
+            'average_number': aggregation.get('averageNumber', 0),
+            'min_number': aggregation.get('minNumber', 0),
+            'max_number': aggregation.get('maxNumber', 0),
+            'most_common_text': aggregation.get('mostCommonText', ''),
+            'unique_count_text': aggregation.get('uniqueCountText', 0),
+            'true_count_boolean': aggregation.get('trueCountBoolean', 0),
+            'false_count_boolean': aggregation.get('falseCountBoolean', 0),
+            'option_counts_select': self._format_option_counts(aggregation.get('optionCountsSelect', [])),
         }
         if template_id:
             values['template_id'] = template_id
         return values
 
-    def _update_aggregation(self, template, agg_data):
-        for question_id, aggregation in agg_data['questions'].items():
-            question = self.env['form.editor.question'].search([
-                ('external_id', '=', int(question_id))
-            ], limit=1)
-
-            if question:
-                question.write({
-                    'average_number': aggregation.get('averageNumber', 0),
-                    'min_number': aggregation.get('minNumber', 0),
-                    'max_number': aggregation.get('maxNumber', 0),
-                    'most_common_text': aggregation.get('mostCommonText', ''),
-                    'unique_count_text': aggregation.get('uniqueCountText', 0),
-                    'true_count_boolean': aggregation.get('trueCountBoolean', 0),
-                    'false_count_boolean': aggregation.get('falseCountBoolean', 0),
-                    'option_counts_select': self._format_option_counts(aggregation.get('optionCountsSelect', [])),
-                })
 
     def _format_option_counts(self, option_counts):
         return '\n'.join([f"{option['option']}: {option['count']}" for option in option_counts])
