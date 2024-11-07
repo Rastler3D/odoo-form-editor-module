@@ -49,7 +49,7 @@
                                     <field name="false_count_boolean"/>
                                 </group>
                                 <group invisible="type != 'Select'">
-                                    <field name="option_counts"/>
+                                    <field name="option_counts_select"/>
                                 </group>
                                 <group invisible="type != 'SingleLine'">
                                     <field name="unique_count_text"/>

@@ -29,4 +29,4 @@ class FormEditorQuestion(models.Model):
     unique_count_text = fields.Integer(string='Unique Text Count')
     true_count_boolean = fields.Integer(string='True Count')
     false_count_boolean = fields.Integer(string='False Count')
-    option_counts = fields.Text(string='Option Counts')
+    option_counts_select = fields.Text(string='Option Counts')
